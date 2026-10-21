@@ -225,25 +225,53 @@ jobs:
           APP="dist/macos/${{ env.APP_NAME }}.app"
           ICNS="src/pynetboot/resources/icons/unetbootin.icns"
           DMG="dist/macos/${{ env.APP_NAME }}-${VER}.dmg"
+          # Spotlight and fseventsd open a volume the moment it mounts, so the
+          # first detach regularly comes back "Resource busy" -- and the
+          # convert that follows then fails too, because the image is still
+          # attached. Retry, then force, rather than giving up on the first.
+          detach_volume() {
+            volume="$1"
+            sync
+            for _attempt in 1 2 3 4 5; do
+              hdiutil detach "$volume" >/dev/null 2>&1 && return 0
+              sleep 3
+              hdiutil detach "$volume" -force >/dev/null 2>&1 && return 0
+              sleep 3
+            done
+            echo "::warning::could not detach $volume"
+            return 1
+          }
           # Build a styled DMG whose mounted volume carries the app icon and a
           # drag-to-Applications shortcut. Falls back to a plain compressed DMG
-          # if the icon/volume tooling misbehaves, so a release is never blocked.
+          # if the icon/volume tooling misbehaves, so a release is never
+          # blocked. Every step is checked: the function used to end on its
+          # own `rm` cleanup, so it reported success however it had gone and
+          # the fallback never ran.
           build_styled_dmg() {
             rm -rf dmg_stage dist/macos/rw.dmg
-            mkdir -p dmg_stage
-            cp -R "$APP" dmg_stage/
-            ln -s /Applications dmg_stage/Applications
-            cp "$ICNS" dmg_stage/.VolumeIcon.icns
+            mkdir -p dmg_stage || return 1
+            cp -R "$APP" dmg_stage/ || return 1
+            ln -s /Applications dmg_stage/Applications || return 1
+            cp "$ICNS" dmg_stage/.VolumeIcon.icns || return 1
             hdiutil create -volname "PyNetboot" -srcfolder dmg_stage \
-              -fs HFS+ -format UDRW -ov -o dist/macos/rw.dmg
+              -fs HFS+ -format UDRW -ov -o dist/macos/rw.dmg || return 1
             MOUNT="$(hdiutil attach -readwrite -noverify -noautoopen dist/macos/rw.dmg | grep -Eo '/Volumes/[^ ]+' | head -1)"
-            SetFile -a C "$MOUNT"
-            hdiutil detach "$MOUNT"
-            hdiutil convert dist/macos/rw.dmg -format UDZO -imagekey zlib-level=9 -ov -o "$DMG"
-            rm -f dist/macos/rw.dmg
-            rm -rf dmg_stage
+            [ -n "$MOUNT" ] || return 1
+            # Keep Spotlight off the volume it is about to be asked to release.
+            sudo mdutil -i off "$MOUNT" >/dev/null 2>&1 || true
+            SetFile -a C "$MOUNT" || true   # cosmetic: the volume icon
+            detach_volume "$MOUNT" || return 1
+            hdiutil convert dist/macos/rw.dmg -format UDZO \
+              -imagekey zlib-level=9 -ov -o "$DMG" || return 1
           }
-          build_styled_dmg || hdiutil create -volname "PyNetboot" -srcfolder "$APP" -format UDZO -ov -o "$DMG"
+          if ! build_styled_dmg; then
+            echo "::warning::styled DMG failed; shipping a plain compressed one"
+            detach_volume /Volumes/PyNetboot || true
+            hdiutil create -volname "PyNetboot" -srcfolder "$APP" \
+              -format UDZO -ov -o "$DMG"
+          fi
+          rm -f dist/macos/rw.dmg
+          rm -rf dmg_stage
           ls -lh "$DMG"
 
       - name: Upload artifacts

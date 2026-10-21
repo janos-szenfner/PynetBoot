@@ -296,10 +296,100 @@ class TestDistributionManager(unittest.TestCase):
         bsd_names = [d['name'] for d in bsd_distros]
         self.assertIn('freebsd', bsd_names)
         self.assertIn('netbsd', bsd_names)
+        self.assertIn('openbsd', bsd_names)
 
         windows_distros = self.manager.get_distributions_by_category('Windows')
         windows_names = [d['name'] for d in windows_distros]
         self.assertIn('windows11', windows_names)
+
+
+class TestOpenBSD(unittest.TestCase):
+    """OpenBSD 8.0, the release published in October 2026."""
+
+    def setUp(self):
+        self.manager = DistributionManager()
+        self.versions = self.manager.get_versions('openbsd')
+
+    def test_openbsd_is_offered_as_a_bsd(self):
+        distro = self.manager.get_distribution('openbsd')
+        self.assertIsNotNone(distro, "OpenBSD is not in the built-in list")
+        self.assertEqual(distro.category, 'BSD')
+        self.assertEqual(distro.display_name, 'OpenBSD')
+
+    def test_the_current_release_is_offered(self):
+        self.assertTrue(self.versions, "OpenBSD has no versions")
+        names = [v['name'] for v in self.versions]
+        self.assertIn('Latest (8.0)', names)
+
+    def test_the_image_is_the_amd64_installer(self):
+        """install80.iso -- cd80.iso is the small network-install image."""
+        url = self.versions[0]['url']
+        self.assertTrue(url.startswith('https://'), url)
+        self.assertTrue(url.endswith('/8.0/amd64/install80.iso'), url)
+
+    def test_the_download_is_verifiable(self):
+        """OpenBSD publishes one SHA256 file covering the whole release."""
+        version = self.versions[0]
+        self.assertEqual(
+            version['sha256_url'],
+            'https://cdn.openbsd.org/pub/OpenBSD/8.0/amd64/SHA256')
+        # The ISO is matched by name out of that listing, so a size that is
+        # merely plausible is not enough; this is the published one.
+        self.assertEqual(version['size'], 832565248)
+
+    def test_the_checksum_is_read_out_of_the_release_listing(self):
+        """The file names every file of the release, in the BSD layout."""
+        from unittest.mock import patch
+
+        from pynetboot.core.downloader import Downloader
+
+        listing = (
+            "SHA256 (BUILDINFO) = " + "a" * 64 + "\n"
+            "SHA256 (base80.tgz) = " + "b" * 64 + "\n"
+            "SHA256 (cd80.iso) = " + "c" * 64 + "\n"
+            "SHA256 (install80.iso) = " + "d" * 64 + "\n")
+        with patch.object(Downloader, 'download_page_contents',
+                          return_value=listing):
+            found = Downloader().fetch_checksum_from_url(
+                self.versions[0]['sha256_url'], 'install80.iso')
+        # Not cd80.iso, which sits above it and ends in the same four letters.
+        self.assertEqual(found, 'd' * 64)
+
+
+class TestEveryDownloadIsVerifiable(unittest.TestCase):
+    """Nothing may be written to a drive unchecked.
+
+    The README promises every downloadable version is verified against a
+    checksum its publisher publishes; this is what holds that true when an
+    entry is added.
+    """
+
+    CHECKSUM_FIELDS = ('sha256', 'sha1', 'md5', 'sha512',
+                       'sha256_url', 'sha512_url', 'md5_url')
+
+    def test_each_downloadable_version_names_a_checksum(self):
+        manager = DistributionManager()
+        unverified = []
+        for distro in manager.get_distributions():
+            for version in manager.get_versions(distro['name']):
+                if not version.get('url'):
+                    continue            # fetched by hand, e.g. Windows
+                if not any(version.get(f) for f in self.CHECKSUM_FIELDS):
+                    unverified.append(f"{distro['display_name']} "
+                                      f"{version['name']}")
+        self.assertEqual(unverified, [],
+                         "these would download unverified")
+
+    def test_a_version_without_a_url_is_the_exception_not_the_rule(self):
+        """Only the entries that send you to the publisher may lack a URL."""
+        manager = DistributionManager()
+        for distro in manager.get_distributions():
+            for version in manager.get_versions(distro['name']):
+                if not version.get('url'):
+                    self.assertTrue(
+                        version.get('download_page'),
+                        f"{distro['display_name']} {version['name']} has "
+                        "neither a URL nor a page to send the user to")
 
 
 class TestConfigManager(unittest.TestCase):

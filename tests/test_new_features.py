@@ -190,7 +190,8 @@ class TestDistributionMirrors(unittest.TestCase):
         # Test BSD category
         bsd_distros = manager.get_distributions_by_category('BSD')
         bsd_names = [d['name'] for d in bsd_distros]
-        expected_bsd = ['freebsd', 'netbsd', 'midnightbsd', 'ghostbsd', 'dragonflybsd', 'truenas']
+        expected_bsd = ['freebsd', 'netbsd', 'openbsd', 'midnightbsd',
+                        'ghostbsd', 'dragonflybsd', 'truenas']
         self.assertEqual(sorted(bsd_names), sorted(expected_bsd))
 
         # Test Windows category

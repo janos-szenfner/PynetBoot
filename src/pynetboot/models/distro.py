@@ -574,6 +574,23 @@ class DistributionManager:
                 'icon': 'netbsd',
             },
             {
+                'name': 'openbsd',
+                'display_name': 'OpenBSD',
+                'description': 'OpenBSD operating system',
+                'category': 'BSD',
+                'homepage': 'https://www.openbsd.org',
+                'versions': [
+                    {'name': 'Latest (8.0)',
+                     'url': 'https://cdn.openbsd.org/pub/OpenBSD/8.0/amd64/install80.iso',
+                     # One SHA256 file covers every file of the release, in the
+                     # BSD `SHA256 (file) = hex` layout, so the ISO is matched
+                     # by name out of the whole list.
+                     'sha256_url': 'https://cdn.openbsd.org/pub/OpenBSD/8.0/amd64/SHA256',
+                     'size': 832565248},
+                ],
+                'icon': 'openbsd',
+            },
+            {
                 'name': 'midnightbsd',
                 'display_name': 'MidnightBSD',
                 'description': 'MidnightBSD - A BSD derived OS',

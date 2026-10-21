@@ -230,8 +230,8 @@ drops writes is reported during the install rather than at boot.
 - macOS: the application menu's *About* opens this same dialog, rather than the standard Cocoa panel
 
 ### Distribution Management
-- Built-in list of **22 distributions** across Linux (14), BSD (6), and Windows (2), covering **45 versions** — see the full table under *Next Steps → Distribution Statistics*
-- Version management with download URLs, file sizes, and dynamic checksums (every one of the 43 downloadable versions is verified against a checksum its publisher publishes)
+- Built-in list of **23 distributions** across Linux (14), BSD (7), and Windows (2), covering **46 versions** — see the full table under *Next Steps → Distribution Statistics*
+- Version management with download URLs, file sizes, and dynamic checksums (every one of the 44 downloadable versions is verified against a checksum its publisher publishes)
 - Search and filtering by category
 - Easy extensibility to add more distributions
 - JSON-based external distribution loading
@@ -606,9 +606,9 @@ See [LICENSE](LICENSE) for the full license text.
 This is a work in progress. Here are the tasks needed to complete the rewrite:
 
 ### 🎯 Distribution Statistics
-- **Total Distributions**: 22 across 45 versions
-- **Categories**: Linux (14), BSD (6), Windows (2)
-- **Verified downloads**: all 43 downloadable versions carry a published
+- **Total Distributions**: 23 across 46 versions
+- **Categories**: Linux (14), BSD (7), Windows (2)
+- **Verified downloads**: all 44 downloadable versions carry a published
   checksum; the two Windows entries have no direct URL to verify
 
 #### Available Distributions by Category
@@ -631,6 +631,7 @@ This is a work in progress. Here are the tasks needed to complete the rewrite:
 | Linux | Tiny Core Linux | 17.1 TinyCore, 17.1 Core Plus |
 | BSD | FreeBSD | Latest (15.1) |
 | BSD | NetBSD | Latest (10.1) |
+| BSD | OpenBSD | Latest (8.0) |
 | BSD | MidnightBSD | Latest (4.0.6) |
 | BSD | GhostBSD | Latest (26.1-R15.0p2) |
 | BSD | DragonFly BSD | Latest (6.4.2) |
@@ -670,7 +671,7 @@ This is a work in progress. Here are the tasks needed to complete the rewrite:
 ### 🧪 Testing
 - [x] Add unit tests for core functionality - ✅ Complete
 - [x] Add unit tests for platform-specific code - ✅ Complete
-- [x] Add integration tests - ⚠️ **Unit-level only.** All 413 tests (376 run, 37 skipped as platform-specific) mock `subprocess`; **no test actually formats a drive or produces a bootable USB.** A loopback-image integration test is still needed.
+- [x] Add integration tests - ⚠️ **Unit-level only.** All 420 tests (383 run, 37 skipped as platform-specific) mock `subprocess`; **no test actually formats a drive or produces a bootable USB.** A loopback-image integration test is still needed.
 - [x] Add UI tests for the window layer - ✅ Complete (ported to CustomTkinter)
 
 ### 📝 Documentation
@@ -742,9 +743,9 @@ This is a work in progress. Here are the tasks needed to complete the rewrite:
 | Unit Tests | ⚠️ Unit-level only — 413 tests, all mocking `subprocess`; no real bootable-USB test |
 | Documentation | ⚠️ Partial |
 | Resources | ✅ Bundled and used — bootloader binaries in `resources/bootloader/` are now referenced via `pynetboot.resources` resolver; icons and logos are also properly bundled |
-| Full Distribution List | ✅ Complete — 22 distros over 45 versions, including ARM64 builds of openSUSE; checksums dynamically fetched |
+| Full Distribution List | ✅ Complete — 23 distros over 46 versions, including ARM64 builds of openSUSE; checksums dynamically fetched |
 | Translations | ✅ Implemented — `core/i18n.py` parses bundled Qt `.ts` catalogs (de/es/fr/it/hu) into gettext-style `_()`; wired in `main.load_translations()` |
-| Checksum Verification | ✅ Dynamic — every one of the 43 downloadable versions is checked against a checksum file its publisher publishes (SHA256, or SHA512/MD5 where that is all that is offered). The two Windows entries have no direct URL to verify |
+| Checksum Verification | ✅ Dynamic — every one of the 44 downloadable versions is checked against a checksum file its publisher publishes (SHA256, or SHA512/MD5 where that is all that is offered). The two Windows entries have no direct URL to verify |
 | Packaging | ✅ Complete — CI builds Windows EXE, macOS ZIP + DMG, AppImage, DEB, RPM and Flatpak on every `v*` tag and publishes them as raw release assets. DEB/RPM/Flatpak ship `.desktop` + AppStream metadata and icons, so the app appears in the GNOME/KDE menus with its icon and GPL license. *macOS build is not yet codesigned/notarized.* |
 | Update Check | ✅ About asks GitHub for the newest release and reports whether this is the current one; notification only, nothing is installed |
 | Elevation / "no-terminal" launch | ✅ Implemented — `core/elevation.py` provides a single elevation model with a `sudo` interceptor. The GUI runs as a normal user and each privileged command elevates on demand: pkexec → `sudo` (graphical askpass) on Linux, osascript on macOS, UAC on Windows. No extra toolkit is required; the DEB/RPM depend on `sudo`. Double-click launch works on all three platforms |

@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: PyNetboot
 Upstream-Contact: Janos Szenfner <szenfner@outlook.com>
-Source: https://github.com/janos-szenfner/unetbootin-python
+Source: https://github.com/janos-szenfner/PynetBoot
 
 Files: *
 Copyright: 2026 Janos Szenfner <szenfner@outlook.com>

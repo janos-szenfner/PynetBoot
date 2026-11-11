@@ -46,7 +46,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Janos Szenfner",
     author_email="szenfner@outlook.com",
-    url="https://github.com/janosszenfner/unetbootin-python",
+    url="https://github.com/janos-szenfner/PynetBoot",
     license="GPLv2+",
 
     # Package configuration

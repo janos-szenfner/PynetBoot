@@ -88,7 +88,7 @@ pynetboot/
 ### From a release (recommended)
 
 Prebuilt packages for every platform are attached to each
-[GitHub release](https://github.com/janos-szenfner/unetbootin-python/releases).
+[GitHub release](https://github.com/janos-szenfner/PynetBoot/releases).
 Download the one for your system — no Python or extra toolkit required.
 
 | Platform | Asset | Install / run |
@@ -752,7 +752,7 @@ This is a work in progress. Here are the tasks needed to complete the rewrite:
 
 ## Links
 
-- [Releases (prebuilt packages)](https://github.com/janos-szenfner/unetbootin-python/releases)
+- [Releases (prebuilt packages)](https://github.com/janos-szenfner/PynetBoot/releases)
 - [Original UNetbootin](https://unetbootin.sourceforge.net/)
 - [SourceForge Project](https://sourceforge.net/projects/pynetboot/)
 - [GitHub Mirror](https://github.com/pynetboot/pynetboot)

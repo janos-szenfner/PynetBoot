@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 # The releases feed for this project. The API answers unauthenticated requests
 # with a rate limit per address, which is ample for opening a dialog.
 LATEST_RELEASE_API = ("https://api.github.com/repos/janos-szenfner/"
-                      "unetbootin-python/releases/latest")
-RELEASES_PAGE = ("https://github.com/janos-szenfner/unetbootin-python/"
+                      "PynetBoot/releases/latest")
+RELEASES_PAGE = ("https://github.com/janos-szenfner/PynetBoot/"
                  "releases/latest")
 
 # Short: this runs while a dialog sits there saying it is checking, and an

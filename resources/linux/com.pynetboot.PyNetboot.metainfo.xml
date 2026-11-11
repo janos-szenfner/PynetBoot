@@ -35,8 +35,8 @@
   <icon type="stock">com.pynetboot.PyNetboot</icon>
   <content_rating type="oars-1.1"/>
   <update_contact>szenfner@outlook.com</update_contact>
-  <url type="homepage">https://github.com/janos-szenfner/unetbootin-python</url>
-  <url type="bugtracker">https://github.com/janos-szenfner/unetbootin-python/issues</url>
+  <url type="homepage">https://github.com/janos-szenfner/PynetBoot</url>
+  <url type="bugtracker">https://github.com/janos-szenfner/PynetBoot/issues</url>
   <!-- Kept in the source tree rather than injected at build time so the deb
        and rpm ship release notes too, not just the Flatpak. The build stamps
        the tag version in if it is not already listed here. -->

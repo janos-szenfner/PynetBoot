@@ -1614,7 +1614,7 @@ class MainWindowCTk:
         """Small modal About dialog."""
         from pynetboot import APP_NAME, APP_VERSION
 
-        repo_url = "https://github.com/janos-szenfner/unetbootin-python"
+        repo_url = "https://github.com/janos-szenfner/PynetBoot"
 
         win = ctk.CTkToplevel(self.root)
         apply_window_icon(win)

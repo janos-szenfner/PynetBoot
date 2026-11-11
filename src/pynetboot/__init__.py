@@ -6,7 +6,7 @@ Original C++ UNetbootin by Geza Kovacs <geza0kovacs@gmail.com>
 Python rewrite by Janos Szenfner <szenfner@outlook.com>, started in 2026
 """
 
-__version__ = "1.10.6"
+__version__ = "1.11.0"
 __author__ = "Janos Szenfner"
 __license__ = "GPLv2+"
 

@@ -613,28 +613,28 @@ This is a work in progress. Here are the tasks needed to complete the rewrite:
 
 | Type | Distribution | Versions |
 |------|--------------|----------|
-| Linux | Ubuntu | 26.04 LTS, 24.04 LTS, 25.10 (non-LTS), 22.04 LTS, 20.04 LTS |
+| Linux | Ubuntu | 26.04 LTS, 24.04 LTS, 26.10 (non-LTS), 22.04 LTS, 20.04 LTS |
 | Linux | Debian | 13 (Trixie) |
-| Linux | Fedora | 44, 43 |
+| Linux | Fedora | 45, 44 |
 | Linux | Linux Mint | 22.3 Cinnamon (Zena), 22.3 MATE (Zena), 22.2 Cinnamon (Zara) |
-| Linux | Manjaro Linux | 26.0.4 Xfce, 26.0.4 KDE Plasma, 26.0.4 GNOME |
+| Linux | Manjaro Linux | 26.1.3 Xfce, 26.1.3 KDE Plasma, 26.1.3 GNOME |
 | Linux | Arch Linux | Latest |
 | Linux | openSUSE | Leap 16.1 (Stable), Leap 16.0 (Stable), Tumbleweed (Rolling), Tumbleweed ARM (Rolling), Leap 16.1 ARM (Stable), Leap 16.0 ARM (Stable) |
 | Linux | Zorin OS | Core 18.1, Lite 18.1, Core 18 (r3) |
-| Linux | Kali Linux | Latest (2026.2) |
+| Linux | Kali Linux | Latest (2026.3) |
 | Linux | Slackware Linux | Latest (15.0) |
 | Linux | OpenMandriva | ROME Plasma (Rolling, X11), ROME Plasma (Rolling, Wayland), ROME GNOME (Rolling), 6.0 Rock Plasma (Stable, X11), 6.0 Rock Plasma (Stable, Wayland) |
 | Linux | Rocky Linux | 10.2 (Stable), 9.8 (Stable) |
 | Linux | CentOS Stream | 10 (Rolling), 9 (Rolling) |
 | Linux | Tiny Core Linux | 17.1 TinyCore, 17.1 Core Plus |
 | BSD | FreeBSD | Latest (15.1) |
-| BSD | NetBSD | Latest (10.1) |
+| BSD | NetBSD | Latest (11.1) |
 | BSD | OpenBSD | Latest (8.0) |
-| BSD | MidnightBSD | Latest (4.0.6) |
-| BSD | GhostBSD | Latest (26.1-R15.0p2) |
+| BSD | MidnightBSD | Latest (4.0.8) |
+| BSD | GhostBSD | Latest (26.3.R15.1p6) |
 | BSD | DragonFly BSD | Latest (6.4.2) |
-| BSD | TrueNAS | Latest (SCALE Goldeye 25.10.5) |
-| Windows | Windows 11 | 25H2 (download from Microsoft) |
+| BSD | TrueNAS | Latest (SCALE Goldeye 25.10.7) |
+| Windows | Windows 11 | 26H2 (download from Microsoft) |
 | Windows | Windows 10 | 22H2 (download from Microsoft) |
 
 > **Note on Windows entries.** Microsoft does not publish direct ISO links, so

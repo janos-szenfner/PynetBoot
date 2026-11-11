@@ -25,7 +25,10 @@ env:
 jobs:
   test:
     name: Run Tests
-    runs-on: ubuntu-latest
+    # Pinned: the ubuntu-26.04 image behind ubuntu-latest shipped with a
+    # broken apt mirror (azure.archive.ubuntu.com unresolvable), killing
+    # every Linux job's "Install dependencies" step. Revisit once fixed.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -288,7 +291,10 @@ jobs:
 
   build-linux-appimage:
     name: Build Linux AppImage
-    runs-on: ubuntu-latest
+    # Pinned: the ubuntu-26.04 image behind ubuntu-latest shipped with a
+    # broken apt mirror (azure.archive.ubuntu.com unresolvable), killing
+    # every Linux job's "Install dependencies" step. Revisit once fixed.
+    runs-on: ubuntu-24.04
     needs: test
     steps:
       - name: Checkout repository
@@ -441,7 +447,10 @@ jobs:
 
   build-linux-deb:
     name: Build Linux DEB
-    runs-on: ubuntu-latest
+    # Pinned: the ubuntu-26.04 image behind ubuntu-latest shipped with a
+    # broken apt mirror (azure.archive.ubuntu.com unresolvable), killing
+    # every Linux job's "Install dependencies" step. Revisit once fixed.
+    runs-on: ubuntu-24.04
     needs: test
     steps:
       - name: Checkout repository
@@ -565,7 +574,10 @@ jobs:
 
   build-linux-rpm:
     name: Build Linux RPM
-    runs-on: ubuntu-latest
+    # Pinned: the ubuntu-26.04 image behind ubuntu-latest shipped with a
+    # broken apt mirror (azure.archive.ubuntu.com unresolvable), killing
+    # every Linux job's "Install dependencies" step. Revisit once fixed.
+    runs-on: ubuntu-24.04
     needs: test
     steps:
       - name: Checkout repository
@@ -686,7 +698,10 @@ jobs:
 
   build-flatpak:
     name: Build Flatpak
-    runs-on: ubuntu-latest
+    # Pinned: the ubuntu-26.04 image behind ubuntu-latest shipped with a
+    # broken apt mirror (azure.archive.ubuntu.com unresolvable), killing
+    # every Linux job's "Install dependencies" step. Revisit once fixed.
+    runs-on: ubuntu-24.04
     needs: test
     # Flatpak in CI is sandbox-sensitive and the least natural fit for a tool
     # that writes raw block devices. Don't let it block the release: if it
@@ -782,7 +797,10 @@ jobs:
 
   create-release:
     name: Create GitHub Release
-    runs-on: ubuntu-latest
+    # Pinned: the ubuntu-26.04 image behind ubuntu-latest shipped with a
+    # broken apt mirror (azure.archive.ubuntu.com unresolvable), killing
+    # every Linux job's "Install dependencies" step. Revisit once fixed.
+    runs-on: ubuntu-24.04
     needs: [build-windows, build-macos, build-linux-appimage, build-linux-deb, build-linux-rpm, build-flatpak]
     # contents:write lets GITHUB_TOKEN create the release and generate notes;
     # actions:read lets download-artifact fetch this run's build artifacts.

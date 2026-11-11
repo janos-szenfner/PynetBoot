@@ -176,19 +176,43 @@ def get_drive_list() -> List[Dict[str, Any]]:
     return drives
 
 
+def _udev_device(device: str):
+    """Look up `device` in the udev database via pyudev, when installed.
+
+    pyudev reads the same properties `udevadm info` reports, in-process —
+    no subprocess per drive, which adds up on a refresh over many disks.
+    Any failure (module absent, libudev missing inside a Flatpak sandbox,
+    unknown node) returns None so the subprocess probes still get a turn.
+    """
+    try:
+        import pyudev
+    except ImportError:
+        return None
+    try:
+        return pyudev.Devices.from_device_file(pyudev.Context(), device)
+    except Exception:  # noqa: BLE001 - pyudev raises its own env/device errors
+        return None
+
+
 def get_drive_serial(device: str) -> Optional[str]:
     """Serial number for a device, or None when it cannot be determined.
 
-    Tries udevadm, then sg_vpd, then hdparm. Each is attempted independently:
-    previously one shared try block meant the first missing tool skipped the
-    remaining fallbacks entirely. A tool that is absent is also not an error -
-    the serial is optional metadata, and inside a Flatpak sandbox none of these
-    host utilities are present.
+    Tries pyudev, then udevadm, then sg_vpd, then hdparm. Each is attempted
+    independently: previously one shared try block meant the first missing
+    tool skipped the remaining fallbacks entirely. A tool that is absent is
+    also not an error - the serial is optional metadata, and inside a
+    Flatpak sandbox none of these host utilities are present.
     """
     import shutil
 
     if not device.startswith('/dev/'):
         device = f"/dev/{device}"
+
+    udev = _udev_device(device)
+    if udev is not None:
+        serial = udev.get('ID_SERIAL') or udev.get('ID_SERIAL_SHORT')
+        if serial:
+            return serial
 
     def _run(command):
         """Run a probe, returning its output or None if it cannot be used."""

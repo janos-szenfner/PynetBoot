@@ -184,18 +184,16 @@ drops writes is reported during the install rather than at boot.
 - **Python 3.10+**
 - **customtkinter>=6.0.0** - Modern, HiDPI-aware widgets on the Tkinter backend. 6.0.0 is the floor because the window depends on internals that moved across major versions: the click gate (`_mouse_inside`), the draw engine's shape method, and the theme's font family.
   > ✅ **Licensing:** CustomTkinter is **MIT licensed**, compatible with this project's GPLv2-or-later and fine to bundle into redistributable executables. It replaced PySimpleGUI, whose licence terms changed across major versions.
-- **Pillow>=10.0.0** - Icon rendering (`CTkImage`)
-- **requests>=2.28.0** - HTTP downloads
-- **psutil>=5.9.0** - System information
+- **Pillow>=13.0.0** - Icon rendering (`CTkImage`)
+- **requests>=2.34.2** - HTTP downloads
+- **psutil>=7.2.2** - System information
 
 ### Optional Dependencies (auto-detected)
-- **pywin32>=305** - Windows-specific features
-- **pyobjc>=9.0** - macOS-specific features  
-- **pyudev>=0.24.0** - Linux hardware detection
-- **py7zr>=0.20.0** - 7z archive support
-- **beautifulsoup4>=4.12.0** - HTML parsing for directory listings
-- **pycdlib** - pure-Python ISO9660 fallback, tried last when no external
-  extractor is present
+- **pyudev>=0.24.5** - Linux hardware detection (in-process udev lookups)
+- **py7zr>=1.1.4** - 7z archive support
+- **beautifulsoup4>=4.15.0** - HTML parsing for directory listings
+- **pycdlib>=1.22.0** - pure-Python ISO9660 fallback, tried last when no
+  external extractor is present
 
 > **On extracting ISOs.** In practice this uses `xorriso`, `7z` or **bsdtar**,
 > whichever is installed. bsdtar matters most on Windows, which ships it as

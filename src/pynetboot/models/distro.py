@@ -197,13 +197,13 @@ class DistributionManager:
                      'sha256_url': 'https://releases.ubuntu.com/26.04/SHA256SUMS',
                      'size': 6482409472},
                     {'name': '24.04 LTS',
-                     'url': 'https://releases.ubuntu.com/24.04/ubuntu-24.04.4-desktop-amd64.iso',
-                     'sha256_url': 'https://releases.ubuntu.com/24.04/SHA256SUMS',
-                     'size': 4500000000},
-                    {'name': '25.10 (non-LTS)',
-                     'url': 'https://releases.ubuntu.com/25.10/ubuntu-25.10-desktop-amd64.iso',
-                     'sha256_url': 'https://releases.ubuntu.com/25.10/SHA256SUMS',
-                     'size': 5702520832},
+                     'url': 'https://releases.ubuntu.com/24.04.5.1/ubuntu-24.04.5.1-desktop-amd64.iso',
+                     'sha256_url': 'https://releases.ubuntu.com/24.04.5.1/SHA256SUMS',
+                     'size': 6250332160},
+                    {'name': '26.10 (non-LTS)',
+                     'url': 'https://releases.ubuntu.com/26.10/ubuntu-26.10-desktop-amd64.iso',
+                     'sha256_url': 'https://releases.ubuntu.com/26.10/SHA256SUMS',
+                     'size': 6615449600},
                     {'name': '22.04 LTS',
                      'url': 'https://releases.ubuntu.com/22.04/ubuntu-22.04.5-desktop-amd64.iso',
                      'sha256_url': 'https://releases.ubuntu.com/22.04/SHA256SUMS',
@@ -224,9 +224,9 @@ class DistributionManager:
                 'versions': [
                     {
                      'name': '13 (Trixie)',
-                     'url': 'https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-13.6.0-amd64-DVD-1.iso',
+                     'url': 'https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-13.7.0-amd64-DVD-1.iso',
                      'sha256_url': 'https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/SHA256SUMS',
-                     'size': 4200000000},
+                     'size': 3992977408},
                 ],
                 'icon': 'debian',
             },
@@ -238,15 +238,15 @@ class DistributionManager:
                 'homepage': 'https://fedoraproject.org',
                 'versions': [
                     {
+                     'name': '45',
+                     'url': 'https://dl.fedoraproject.org/pub/fedora/linux/releases/45/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-45-1.6.iso',
+                     'sha256_url': 'https://dl.fedoraproject.org/pub/fedora/linux/releases/45/Everything/x86_64/iso/Fedora-Everything-45-1.6-x86_64-CHECKSUM',
+                     'size': 1300000000},
+                    {
                      'name': '44',
                      'url': 'https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-44-1.7.iso',
                      'sha256_url': 'https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Everything/x86_64/iso/Fedora-Everything-44-1.7-x86_64-CHECKSUM',
                      'size': 1200000000},
-                    {
-                     'name': '43',
-                     'url': 'https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-43-1.6.iso',
-                     'sha256_url': 'https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/iso/Fedora-Everything-43-1.6-x86_64-CHECKSUM',
-                     'size': 1100000000},
                 ],
                 'icon': 'fedora',
             },
@@ -279,18 +279,18 @@ class DistributionManager:
                 'category': 'Linux',
                 'homepage': 'https://manjaro.org',
                 'versions': [
-                    {'name': '26.0.4 Xfce',
-                     'url': 'https://download.manjaro.org/xfce/26.0.4/manjaro-xfce-26.0.4-260327-linux618.iso',
-                     'sha256_url': 'https://download.manjaro.org/xfce/26.0.4/manjaro-xfce-26.0.4-260327-linux618.iso.sha256',
-                     'size': 5363275776},
-                    {'name': '26.0.4 KDE Plasma',
-                     'url': 'https://download.manjaro.org/kde/26.0.4/manjaro-kde-26.0.4-260327-linux618.iso',
-                     'sha256_url': 'https://download.manjaro.org/kde/26.0.4/manjaro-kde-26.0.4-260327-linux618.iso.sha256',
-                     'size': 5669099520},
-                    {'name': '26.0.4 GNOME',
-                     'url': 'https://download.manjaro.org/gnome/26.0.4/manjaro-gnome-26.0.4-260327-linux618.iso',
-                     'sha256_url': 'https://download.manjaro.org/gnome/26.0.4/manjaro-gnome-26.0.4-260327-linux618.iso.sha256',
-                     'size': 5518409728},
+                    {'name': '26.1.3 Xfce',
+                     'url': 'https://download.manjaro.org/xfce/26.1.3/manjaro-xfce-26.1.3-261028-linux618.iso',
+                     'sha256_url': 'https://download.manjaro.org/xfce/26.1.3/manjaro-xfce-26.1.3-261028-linux618.iso.sha256',
+                     'size': 5210302464},
+                    {'name': '26.1.3 KDE Plasma',
+                     'url': 'https://download.manjaro.org/kde/26.1.3/manjaro-kde-26.1.3-261028-linux618.iso',
+                     'sha256_url': 'https://download.manjaro.org/kde/26.1.3/manjaro-kde-26.1.3-261028-linux618.iso.sha256',
+                     'size': 5589088256},
+                    {'name': '26.1.3 GNOME',
+                     'url': 'https://download.manjaro.org/gnome/26.1.3/manjaro-gnome-26.1.3-261028-linux618.iso',
+                     'sha256_url': 'https://download.manjaro.org/gnome/26.1.3/manjaro-gnome-26.1.3-261028-linux618.iso.sha256',
+                     'size': 5372135424},
                 ],
                 'icon': 'manjaro',
             },
@@ -319,12 +319,12 @@ class DistributionManager:
                 'versions': [
                     {
     'name': 'Leap 16.1 (Stable)',
-    'url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-x86_64-Build41.1.install.iso',
+    'url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-x86_64-Build60.2.install.iso',
                      # openSUSE publishes checksums only for the
                      # build-numbered image, not the unversioned
                      # alias, and only as SHA512.
-                     'sha512_url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-x86_64-Build41.1.install.iso.sha512',
-     'size': 4564451328},
+                     'sha512_url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-x86_64-Build60.2.install.iso.sha512',
+     'size': 4516216832},
                     {
     'name': 'Leap 16.0 (Stable)',
     'url': 'https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64-Build178.27.install.iso',
@@ -353,11 +353,11 @@ class DistributionManager:
      'size': 4131106816},
                     {
     'name': 'Leap 16.1 ARM (Stable)',
-    'url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-aarch64-Build41.1.install.iso',
-                     # The ARM build number differs from the x86_64 one for
-                     # the same Leap release.
-                     'sha512_url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-aarch64-Build41.1.install.iso.sha512',
-     'size': 4672454656},
+    'url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-aarch64-Build60.2.install.iso',
+                     # The ARM build number can differ from the x86_64 one
+                     # for the same Leap release.
+                     'sha512_url': 'https://download.opensuse.org/distribution/leap/16.1/offline/Leap-16.1-offline-installer-aarch64-Build60.2.install.iso.sha512',
+     'size': 4607442944},
                     {
     'name': 'Leap 16.0 ARM (Stable)',
     'url': 'https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-aarch64-Build178.27.install.iso',
@@ -404,10 +404,10 @@ class DistributionManager:
                 'homepage': 'https://www.kali.org',
                 'versions': [
                     {
-    'name': 'Latest (2026.2)',
-    'url': 'https://cdimage.kali.org/kali-2026.2/kali-linux-2026.2-installer-amd64.iso',
-                     'sha256_url': 'https://cdimage.kali.org/kali-2026.2/SHA256SUMS',
-     'size': 3800000000},
+    'name': 'Latest (2026.3)',
+    'url': 'https://cdimage.kali.org/kali-2026.3/kali-linux-2026.3-installer-amd64.iso',
+                     'sha256_url': 'https://cdimage.kali.org/kali-2026.3/SHA256SUMS',
+     'size': 5047031808},
                 ],
                 'icon': 'kali',
             },
@@ -442,17 +442,17 @@ class DistributionManager:
                     # sha256sums for the directory. Both name the image, so
                     # matching by filename works for either.
                     {'name': 'ROME Plasma (Rolling, X11)',
-                     'url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260213.4403-plasma6x11.x86_64.iso',
-                     'sha256_url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260213.4403-plasma6x11.x86_64.iso.sha256sum',
-                     'size': 3416365056},
+                     'url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260927.4767-plasma6x11.x86_64.iso',
+                     'sha256_url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260927.4767-plasma6x11.x86_64.iso.sha256sum',
+                     'size': 3814817792},
                     {'name': 'ROME Plasma (Rolling, Wayland)',
-                     'url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260213.4404-plasma6wayland.x86_64.iso',
-                     'sha256_url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260213.4404-plasma6wayland.x86_64.iso.sha256sum',
-                     'size': 3407906816},
+                     'url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260927.4765-plasma6wayland.x86_64.iso',
+                     'sha256_url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-snapshot.20260927.4765-plasma6wayland.x86_64.iso.sha256sum',
+                     'size': 3805884416},
                     {'name': 'ROME GNOME (Rolling)',
                      'url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-rome-gnome3.x86_64.iso',
                      'sha256_url': 'https://mirror.openmandriva.org/release_current/ROME/OpenMandrivaLx.rolling-rome-gnome3.x86_64.iso.sha256sum',
-                     'size': 3200000000},
+                     'size': 3596099584},
                     {'name': '6.0 Rock Plasma (Stable, X11)',
                      'url': 'https://mirror.openmandriva.org/release_current/6.0/openmandriva-6.0-plasma6-x11.x86_64.iso',
                      'sha256_url': 'https://mirror.openmandriva.org/release_current/6.0/sha256sums',
@@ -521,7 +521,7 @@ class DistributionManager:
                 'display_name': 'Tiny Core Linux',
                 'description': 'Tiny Core Linux - Minimal Linux desktop',
                 'category': 'Linux',
-                'homepage': 'https://www.tinycorelinux.net',
+                'homepage': 'http://www.tinycorelinux.net',
                 # The release ISOs live under the x86 tree, not x86_64 (that
                 # tree only holds CorePure64), and the site does not serve
                 # HTTPS — the previous https://…/x86_64/… URL always failed.
@@ -565,11 +565,11 @@ class DistributionManager:
                 'category': 'BSD',
                 'homepage': 'https://www.netbsd.org',
                 'versions': [
-                    {'name': 'Latest (10.1)',
-    'url': 'https://cdn.netbsd.org/pub/NetBSD/images/10.1/NetBSD-10.1-amd64.iso',
+                    {'name': 'Latest (11.1)',
+    'url': 'https://cdn.netbsd.org/pub/NetBSD/images/11.1/NetBSD-11.1-amd64.iso',
                      # NetBSD publishes no SHA256 for its images.
-                     'sha512_url': 'https://cdn.netbsd.org/pub/NetBSD/images/10.1/SHA512',
-     'size': 360000000},
+                     'sha512_url': 'https://cdn.netbsd.org/pub/NetBSD/images/11.1/SHA512',
+     'size': 692914176},
                 ],
                 'icon': 'netbsd',
             },
@@ -599,11 +599,12 @@ class DistributionManager:
                 'versions': [
                     {
     # mirror.midnightbsd.org no longer resolves; 3.2.3 is also long superseded.
-    'name': 'Latest (4.0.6)',
-    'url': 'https://midnightbsd.org/ftp/MidnightBSD/releases/amd64/ISO-IMAGES/4.0.6/MidnightBSD-4.0.6--amd64-disc1.iso',
-                     # MidnightBSD publishes SHA512 only.
-                     'sha512_url': 'https://midnightbsd.org/ftp/MidnightBSD/releases/amd64/ISO-IMAGES/4.0.6/CHECKSUM.SHA512',
-     'size': 1062742016},
+    'name': 'Latest (4.0.8)',
+    'url': 'https://midnightbsd.org/ftp/MidnightBSD/releases/amd64/ISO-IMAGES/4.0.8/MidnightBSD-4.0.8--amd64-disc1.iso',
+                     # 4.0.x publishes SHA256 (the older releases had only
+                     # SHA512), in the BSD `SHA256 (file) = hex` layout.
+                     'sha256_url': 'https://midnightbsd.org/ftp/MidnightBSD/releases/amd64/ISO-IMAGES/4.0.8/CHECKSUM.SHA256',
+     'size': 1068308480},
                 ],
                 'icon': 'midnightbsd',
             },
@@ -615,10 +616,10 @@ class DistributionManager:
                 'homepage': 'https://ghostbsd.org',
                 'versions': [
                     {
-    'name': 'Latest (26.1-R15.0p2)',
-    'url': 'https://download.ghostbsd.org/releases/amd64/26.1-R15.0p2/GhostBSD-26.1-R15.0p2.iso',
-                     'sha256_url': 'https://download.ghostbsd.org/releases/amd64/26.1-R15.0p2/GhostBSD-26.1-R15.0p2.iso.sha256',
-     'size': 1900000000},
+    'name': 'Latest (26.3.R15.1p6)',
+    'url': 'https://download.ghostbsd.org/releases/amd64/26.3.R15.1p6/GhostBSD-26.3.R15.1p6.iso',
+                     'sha256_url': 'https://download.ghostbsd.org/releases/amd64/26.3.R15.1p6/GhostBSD-26.3.R15.1p6.iso.sha256',
+     'size': 4122404864},
                 ],
                 'icon': 'ghostbsd',
             },
@@ -646,10 +647,10 @@ class DistributionManager:
                 'homepage': 'https://www.truenas.com',
                 'versions': [
                     {
-    'name': 'Latest (SCALE Goldeye 25.10.5)',
-    'url': 'https://download.truenas.com/TrueNAS-SCALE-Goldeye/25.10.5/TrueNAS-SCALE-25.10.5.iso',
-                     'sha256_url': 'https://download.truenas.com/TrueNAS-SCALE-Goldeye/25.10.5/TrueNAS-SCALE-25.10.5.iso.sha256',
-     'size': 1600000000},
+    'name': 'Latest (SCALE Goldeye 25.10.7)',
+    'url': 'https://download.truenas.com/TrueNAS-SCALE-Goldeye/25.10.7/TrueNAS-SCALE-25.10.7.iso',
+                     'sha256_url': 'https://download.truenas.com/TrueNAS-SCALE-Goldeye/25.10.7/TrueNAS-SCALE-25.10.7.iso.sha256',
+     'size': 2339317760},
                 ],
                 'icon': 'truenas',
             },
@@ -670,7 +671,7 @@ class DistributionManager:
                 # image with the "Disk image" option.
                 'versions': [
                     {
-    'name': '25H2 (download from Microsoft)',
+    'name': '26H2 (download from Microsoft)',
     'url': '',
     'download_page': 'https://www.microsoft.com/software-download/windows11'},
                 ],

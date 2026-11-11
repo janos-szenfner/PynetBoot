@@ -3,18 +3,22 @@
 # PySimpleGUI, whose licence terms have changed across major versions.
 customtkinter>=6.0.0
 # Pillow is used for the window/category icons (CTkImage).
-Pillow>=10.0.0
-requests>=2.28.0
-py7zr>=0.20.0
-psutil>=5.9.0
+Pillow>=13.0.0
+requests>=2.34.2
+py7zr>=1.1.4
+psutil>=7.2.2
 
 # Optional dependencies
-pyudev>=0.24.0 ; sys_platform == 'linux'
-pyobjc>=9.0 ; sys_platform == 'darwin'
-pywin32>=305 ; sys_platform == 'win32'
+# pyudev gives in-process access to the udev database (drive serials)
+# without shelling out to udevadm.
+pyudev>=0.24.5 ; sys_platform == 'linux'
+# Lazy-loaded helpers: HTML directory listings and pure-Python ISO9660
+# extraction, each with a fallback when absent.
+beautifulsoup4>=4.15.0
+pycdlib>=1.22.0
 
 # Development dependencies
-pytest>=7.0.0
-black>=23.0.0
-mypy>=1.0.0
-setuptools>=61.0.0
+pytest>=9.2.0
+black>=26.10.1
+mypy>=2.4.1
+setuptools>=84.2.1

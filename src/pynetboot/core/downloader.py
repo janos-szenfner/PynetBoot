@@ -656,8 +656,8 @@ class Downloader:
             response = self.session.get(url, timeout=DOWNLOAD_TIMEOUT)
             if response.status_code == 200:
                 # Parse HTML to find file links
-                from bs4 import BeautifulSoup
                 try:
+                    from bs4 import BeautifulSoup
                     soup = BeautifulSoup(response.text, 'html.parser')
                     for link in soup.find_all('a'):
                         href = link.get('href', '')

@@ -318,14 +318,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller==6.22.3
-          sudo apt-get update
+          # apt is retried: a transient DNS/network blip on the runner
+          # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
+          apt_install() {
+            for attempt in 1 2 3; do
+              sudo apt-get update && sudo apt-get install -y "$@" && return 0
+              echo "apt attempt $attempt failed; retrying in 30s"
+              [ "$attempt" = 3 ] && return 1
+              sleep 30
+            done
+          }
           # Tk itself must be present so tkinter imports and PyInstaller can
           # bundle libtcl/libtk into the artifact (no runtime dependency on
           # the user's machine).
-          sudo apt-get install -y python3-tk tk8.6 patchelf wget
+          apt_install python3-tk tk8.6 patchelf wget
           # AppImage tooling needs libfuse2 at runtime. Ubuntu 24.04 renamed
           # the package to libfuse2t64; fall back to libfuse2 on older runners.
-          sudo apt-get install -y libfuse2t64 || sudo apt-get install -y libfuse2
+          apt_install libfuse2t64 || apt_install libfuse2
 
       - name: Verify GUI toolkit is bundled and usable
         shell: bash
@@ -450,10 +459,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller==6.22.3
-          sudo apt-get update
+          # apt is retried: a transient DNS/network blip on the runner
+          # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
+          apt_install() {
+            for attempt in 1 2 3; do
+              sudo apt-get update && sudo apt-get install -y "$@" && return 0
+              echo "apt attempt $attempt failed; retrying in 30s"
+              [ "$attempt" = 3 ] && return 1
+              sleep 30
+            done
+          }
           # Tk must be present so tkinter imports and PyInstaller can bundle
           # libtcl/libtk into the package (no runtime dependency on the user).
-          sudo apt-get install -y python3-tk tk8.6 ruby ruby-dev rubygems build-essential rpm
+          apt_install python3-tk tk8.6 ruby ruby-dev rubygems build-essential rpm
           sudo gem install fpm -v 1.15.1
 
       - name: Verify GUI toolkit is bundled and usable
@@ -565,10 +583,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller==6.22.3
-          sudo apt-get update
+          # apt is retried: a transient DNS/network blip on the runner
+          # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
+          apt_install() {
+            for attempt in 1 2 3; do
+              sudo apt-get update && sudo apt-get install -y "$@" && return 0
+              echo "apt attempt $attempt failed; retrying in 30s"
+              [ "$attempt" = 3 ] && return 1
+              sleep 30
+            done
+          }
           # Tk must be present so tkinter imports and PyInstaller can bundle
           # libtcl/libtk into the package (no runtime dependency on the user).
-          sudo apt-get install -y python3-tk tk8.6 ruby ruby-dev rubygems build-essential rpm
+          apt_install python3-tk tk8.6 ruby ruby-dev rubygems build-essential rpm
           sudo gem install fpm -v 1.15.1
 
       - name: Verify GUI toolkit is bundled and usable
@@ -696,18 +723,37 @@ jobs:
           python3 resources/linux/stamp-release.py "$VER" "$METAINFO"
           # Validate the metadata (non-fatal) so any issue that would stop
           # appstream-compose from embedding the license/description is visible.
-          sudo apt-get update && sudo apt-get install -y appstream
+          # apt is retried: a transient DNS/network blip on the runner
+          # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
+          for attempt in 1 2 3; do
+            sudo apt-get update && sudo apt-get install -y appstream && break
+            echo "apt attempt $attempt failed; retrying in 30s"
+            [ "$attempt" = 3 ] && exit 1
+            sleep 30
+          done
           appstreamcli validate --no-net "$METAINFO" || true
 
       - name: Set up Flatpak
         run: |
-          sudo apt-get update
-          sudo apt-get install -y flatpak flatpak-builder
+          # apt is retried, and the runtime/SDK downloads are capped: a hung
+          # fetch once left this step stuck for over an hour until the job
+          # timed out, instead of failing fast and retrying.
+          for attempt in 1 2 3; do
+            sudo apt-get update && sudo apt-get install -y flatpak flatpak-builder && break
+            echo "apt attempt $attempt failed; retrying in 30s"
+            [ "$attempt" = 3 ] && exit 1
+            sleep 30
+          done
           # Use the per-user installation — the runner user cannot modify the
           # system-wide flatpak configuration (ConfigureRemote not allowed).
           flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install --user -y flathub org.freedesktop.Platform//24.08
-          flatpak install --user -y flathub org.freedesktop.Sdk//24.08
+          for attempt in 1 2 3; do
+            timeout 600 flatpak install --user -y flathub org.freedesktop.Platform//24.08 && \
+            timeout 600 flatpak install --user -y flathub org.freedesktop.Sdk//24.08 && break
+            echo "flatpak install attempt $attempt failed; retrying in 30s"
+            [ "$attempt" = 3 ] && exit 1
+            sleep 30
+          done
 
       - name: Build Flatpak
         run: |

@@ -327,10 +327,10 @@ jobs:
           # apt is retried: a transient DNS/network blip on the runner
           # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
           apt_install() {
-            # The Azure archive mirror is flaky — DNS failures and
-            # trickle-slow downloads that never trip apt's failover
-            # (actions/runner-images#14823). Prefer the canonical archive.
-            printf 'https://archive.ubuntu.com/ubuntu/\tpriority:1\nhttps://security.ubuntu.com/ubuntu/\tpriority:2\n' \
+            # *.ubuntu.com DNS resolution is flaky on hosted runners
+            # (actions/runner-images#14823) — take the archive from
+            # third-party mirrors first, canonical hosts last.
+            printf 'https://mirrors.edge.kernel.org/ubuntu/\tpriority:1\nhttps://ubuntu.osuosl.org/ubuntu/\tpriority:2\nhttps://archive.ubuntu.com/ubuntu/\tpriority:3\n' \
               | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
             for attempt in 1 2 3; do
               timeout 300 sudo apt-get update \
@@ -477,10 +477,10 @@ jobs:
           # apt is retried: a transient DNS/network blip on the runner
           # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
           apt_install() {
-            # The Azure archive mirror is flaky — DNS failures and
-            # trickle-slow downloads that never trip apt's failover
-            # (actions/runner-images#14823). Prefer the canonical archive.
-            printf 'https://archive.ubuntu.com/ubuntu/\tpriority:1\nhttps://security.ubuntu.com/ubuntu/\tpriority:2\n' \
+            # *.ubuntu.com DNS resolution is flaky on hosted runners
+            # (actions/runner-images#14823) — take the archive from
+            # third-party mirrors first, canonical hosts last.
+            printf 'https://mirrors.edge.kernel.org/ubuntu/\tpriority:1\nhttps://ubuntu.osuosl.org/ubuntu/\tpriority:2\nhttps://archive.ubuntu.com/ubuntu/\tpriority:3\n' \
               | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
             for attempt in 1 2 3; do
               timeout 300 sudo apt-get update \
@@ -610,10 +610,10 @@ jobs:
           # apt is retried: a transient DNS/network blip on the runner
           # otherwise fails the whole release (seen on ubuntu-26.04 rollout).
           apt_install() {
-            # The Azure archive mirror is flaky — DNS failures and
-            # trickle-slow downloads that never trip apt's failover
-            # (actions/runner-images#14823). Prefer the canonical archive.
-            printf 'https://archive.ubuntu.com/ubuntu/\tpriority:1\nhttps://security.ubuntu.com/ubuntu/\tpriority:2\n' \
+            # *.ubuntu.com DNS resolution is flaky on hosted runners
+            # (actions/runner-images#14823) — take the archive from
+            # third-party mirrors first, canonical hosts last.
+            printf 'https://mirrors.edge.kernel.org/ubuntu/\tpriority:1\nhttps://ubuntu.osuosl.org/ubuntu/\tpriority:2\nhttps://archive.ubuntu.com/ubuntu/\tpriority:3\n' \
               | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
             for attempt in 1 2 3; do
               timeout 300 sudo apt-get update \
@@ -756,9 +756,10 @@ jobs:
           python3 resources/linux/stamp-release.py "$VER" "$METAINFO"
           # Validate the metadata (non-fatal) so any issue that would stop
           # appstream-compose from embedding the license/description is visible.
-          # apt is retried, and the Azure archive mirror is bypassed — it has
-          # been flaky (actions/runner-images#14823). Prefer canonical mirrors.
-          printf 'https://archive.ubuntu.com/ubuntu/\tpriority:1\nhttps://security.ubuntu.com/ubuntu/\tpriority:2\n' \
+          # apt is retried, and *.ubuntu.com hosts are bypassed — their DNS
+          # is flaky on hosted runners (actions/runner-images#14823).
+          # Third-party mirrors first, canonical hosts as fallback.
+          printf 'https://mirrors.edge.kernel.org/ubuntu/\tpriority:1\nhttps://ubuntu.osuosl.org/ubuntu/\tpriority:2\nhttps://archive.ubuntu.com/ubuntu/\tpriority:3\n' \
             | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
           for attempt in 1 2 3; do
             timeout 300 sudo apt-get update \
@@ -771,11 +772,11 @@ jobs:
 
       - name: Set up Flatpak
         run: |
-          # apt is retried, the Azure archive mirror is bypassed (flaky —
-          # actions/runner-images#14823), and the runtime/SDK downloads are
-          # capped: a hung fetch once left this step stuck for over an hour
-          # until the job timed out, instead of failing fast and retrying.
-          printf 'https://archive.ubuntu.com/ubuntu/\tpriority:1\nhttps://security.ubuntu.com/ubuntu/\tpriority:2\n' \
+          # apt is retried, *.ubuntu.com hosts are bypassed (flaky DNS on
+          # hosted runners — actions/runner-images#14823), and the
+          # runtime/SDK downloads are capped: a hung fetch once left this
+          # step stuck for over an hour instead of failing fast.
+          printf 'https://mirrors.edge.kernel.org/ubuntu/\tpriority:1\nhttps://ubuntu.osuosl.org/ubuntu/\tpriority:2\nhttps://archive.ubuntu.com/ubuntu/\tpriority:3\n' \
             | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
           for attempt in 1 2 3; do
             timeout 300 sudo apt-get update \
